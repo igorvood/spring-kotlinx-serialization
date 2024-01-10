@@ -9,9 +9,7 @@ import org.springframework.http.codec.json.KotlinSerializationJsonEncoder
 @Configuration
 class SerializationConfig {
 
-
     private val j = Json
-
 
     @Bean
     fun kotlinSerializationJsonEncoder() = KotlinSerializationJsonEncoder(j)
