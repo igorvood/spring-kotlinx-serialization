@@ -28,13 +28,13 @@ class SomeClient(
             }
 //                .header()
             .retrieve()
-            .awaitBody<String>()
+//            .awaitBody<String>()
+            .awaitBody<ApiDto>()
+        log.info(awaitBody.toString())
 
-        log.info(awaitBody)
-//            .awaitBody<ApiDto>()
-        val decodeFromString = j.decodeFromString(ApiDto.serializer(), awaitBody)
+//        val decodeFromString = j.decodeFromString(ApiDto.serializer(), awaitBody)
 
 
-        return decodeFromString
+        return awaitBody
     }
 }
