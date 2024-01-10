@@ -1,0 +1,6 @@
+somesystem:
+  client:
+    host: localhost
+    port: 8080
+    timeout: 10000
+    http: HTTP
