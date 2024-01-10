@@ -1,6 +1,8 @@
 package com.example.demodelete.dto
 
-@kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ApiDto(
     val s: String
 ){
