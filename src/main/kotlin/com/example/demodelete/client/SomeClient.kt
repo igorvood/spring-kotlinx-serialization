@@ -2,6 +2,7 @@ package com.example.demodelete.client
 
 import com.example.demodelete.dto.ApiDto
 import kotlinx.serialization.json.Json
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.awaitBody
@@ -11,7 +12,7 @@ class SomeClient(
     private val webClient: WebClient,
     private val j: Json
 ) {
-
+    private val log = LoggerFactory.getLogger(this.javaClass)
     suspend fun someRequest(id: String): ApiDto {
 
         val serializer = ApiDto.serializer()
@@ -27,11 +28,13 @@ class SomeClient(
             }
 //                .header()
             .retrieve()
-//            .bodyToMono<ApiDto>(ApiDto::class.java)
-            .awaitBody<ApiDto>()
-//        val decodeFromString = j.decodeFromString(ApiDto.serializer(), awaitBody)
+            .awaitBody<String>()
 
-//        TODO()
-        return awaitBody
+        log.info(awaitBody)
+//            .awaitBody<ApiDto>()
+        val decodeFromString = j.decodeFromString(ApiDto.serializer(), awaitBody)
+
+
+        return decodeFromString
     }
 }
