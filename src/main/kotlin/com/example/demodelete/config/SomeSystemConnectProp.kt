@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConstructorBinding
 data class SomeSystemConnectProp(
     override val host: String,
 
-    override val port: String,
+    override val port: String?,
 
     override val timeout: Int,
 
