@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.google.protobuf.gradle.*
 
 plugins {
     id("org.springframework.boot") version "2.7.1"
@@ -6,7 +7,10 @@ plugins {
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"//"1.9.21"
     kotlin("plugin.spring") version "1.7.20"
+    id("com.google.protobuf") version "0.9.4"
+//    id("com.google.protobuf") version "0.8.19"
 }
+
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
@@ -31,6 +35,56 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    implementation("com.google.protobuf:protobuf-java:3.19.4")
+    implementation("com.google.protobuf:protobuf-kotlin:3.19.4")
+    implementation("io.grpc:grpc-stub:1.15.1")
+    implementation("io.grpc:grpc-protobuf:1.15.1")
+    // Extra proto source files besides the ones residing under
+    // "src/main".
+//    protobuf(files("lib/protos.tar.gz"))
+    protobuf(files("src/main/resources/proto/"))
+    // Extra proto source files for test besides the ones residing under
+    // "src/test".
+//    testProtobuf(files("lib/protos-test.tar.gz"))
+}
+
+protobuf {
+    protoc {
+        // The artifact spec for the Protobuf Compiler
+        artifact = "com.google.protobuf:protoc:3.19.4"
+    }
+    plugins {
+        // Optional: an artifact spec for a protoc plugin, with "grpc" as
+        // the identifier, which can be referred to in the "plugins"
+        // container of the "generateProtoTasks" closure.
+        id("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.15.1"
+        }
+        id("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.3.1"
+//            path = tasks.jar.get().archiveFile.get().asFile.absolutePath
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.builtins {
+//                id("grpc")
+                id("kotlin")
+//                id("grpckt")
+            }
+        }
+//        ofSourceSet("main").forEach {
+//            it.plugins {
+//                // Apply the "grpc" plugin whose spec is defined above, without
+//                // options. Note the braces cannot be omitted, otherwise the
+//                // plugin will not be added. This is because of the implicit way
+//                // NamedDomainObjectContainer binds the methods.
+//                id("grpc") { }
+////                id("grpckt")
+//            }
+//        }
+    }
 }
 
 tasks.withType<KotlinCompile> {
@@ -40,6 +94,31 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+java {
+    val kotlinSrcDir = "src/main/kotlin"
+    val asdf = "build/generated/source/proto/main/grpc"
+    val asdf2 = "build/generated/source/proto/main/java"
+    val asdf3 = "build/generated/source/proto/main/kotlin"
+    val mainJavaSourceSet: SourceDirectorySet = sourceSets.getByName("main").java
+    mainJavaSourceSet.srcDirs(kotlinSrcDir, asdf, asdf2, asdf3)
+    println("java srcDirs -> "+mainJavaSourceSet.srcDirs)
+}
+kotlin{
+    val kotlinSrcDir = "src/main/kotlin"
+    val asdf = "build/generated/source/proto/main/grpc"
+    val asdf2 = "build/generated/source/proto/main/java"
+    val asdf3 = "build/generated/source/proto/main/kotlin"
+    val mainJavaSourceSet: SourceDirectorySet = sourceSets.getByName("main").kotlin
+    mainJavaSourceSet.srcDirs(kotlinSrcDir, asdf, asdf2, asdf3)
+    println("kotlin srcDirs -> "+mainJavaSourceSet.srcDirs)
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+//protobuf {
+//    protoc {
+//        artifact = "com.google.protobuf:protoc:3.0.0"
+//    }
+//}
