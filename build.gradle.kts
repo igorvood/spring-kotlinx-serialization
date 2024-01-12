@@ -54,9 +54,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     implementation("com.google.protobuf:protobuf-kotlin:$googleProtobufVersion")
-    implementation("io.grpc:grpc-kotlin-stub:1.3.0")
-//    implementation("io.grpc:grpc-stub:$ioGrpcVersion")
-//    implementation("io.grpc:grpc-protobuf:$ioGrpcVersion")
+    implementation("io.grpc:grpc-kotlin-stub:1.4.1")
     implementation("io.grpc:protoc-gen-grpc-kotlin:1.3.0")
 
     implementation("net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE")
