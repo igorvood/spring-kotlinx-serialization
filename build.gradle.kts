@@ -83,9 +83,6 @@ protobuf {
         id("grpc") {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
-//        id("grpckotlin") {
-//            artifact = "io.rouz:grpc-kotlin-gen:${grpcKotlinVersionIoRouz}"
-//        }
         id("grpckotlin") {
             artifact = "io.grpc:protoc-gen-grpc-kotlin:${grpcKotlinVersion}:jdk8@jar"
         }
