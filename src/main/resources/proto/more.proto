@@ -2,14 +2,14 @@ syntax = "proto3";
 option java_multiple_files = true;
 package ru.vood.grpc.example.v1;
 
-message MoreMsg {
+message RequestProtoDto {
   string bar = 1;
 }
 
-message Foo {
+message ResponceProtoDto {
   string stuff = 1;
 }
 
 service SomeService{
-  rpc execute(MoreMsg) returns (Foo);
+  rpc execute(RequestProtoDto) returns (ResponceProtoDto);
 }
