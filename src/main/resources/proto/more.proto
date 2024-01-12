@@ -12,4 +12,6 @@ message ResponceProtoDto {
 
 service SomeService{
   rpc execute(RequestProtoDto) returns (ResponceProtoDto);
+
+  rpc executeStream(RequestProtoDto) returns (stream ResponceProtoDto);
 }

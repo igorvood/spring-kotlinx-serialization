@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.google.protobuf.gradle.*
-
+//https://github.com/kana112233/grpc-kotlin-gen?ref=androidexample365.com
 
 
 plugins {
