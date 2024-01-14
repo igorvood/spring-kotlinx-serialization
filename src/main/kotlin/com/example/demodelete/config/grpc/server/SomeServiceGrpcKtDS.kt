@@ -1,5 +1,6 @@
 package com.example.demodelete.config.grpc.server
 
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
@@ -48,6 +49,17 @@ class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.Some
         return ResponseProtoDto.newBuilder()
             .setStuff(request.bar+" secondExecute ")
             .build()
-
     }
+
+    override suspend fun firstExecuteThrow(request: RequestProtoDto): ResponseProtoDto {
+        return someServiceCoroutineClient.secondExecuteThrow(request)
+    }
+
+    override suspend fun secondExecuteThrow(request: RequestProtoDto): ResponseProtoDto {
+        throw CustomException(listOf("1", "2"))
+    }
+
+    class CustomException(val data: List<String>): java.lang.RuntimeException(
+        data.toString()
+    )
 }
