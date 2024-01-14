@@ -20,4 +20,9 @@ service SomeService{
   rpc secondExecute(RequestProtoDto) returns (ResponseProtoDto);
 
 
+  rpc firstExecuteThrow(RequestProtoDto) returns (ResponseProtoDto);
+
+  rpc secondExecuteThrow(RequestProtoDto) returns (ResponseProtoDto);
+
+
 }
