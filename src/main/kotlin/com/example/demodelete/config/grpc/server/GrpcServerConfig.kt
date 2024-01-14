@@ -12,7 +12,7 @@ class GrpcServerConfig {
     fun grpcServer(someServiceCoroutineImplBase: SomeServiceGrpcKt.SomeServiceCoroutineImplBase): Server {
 
         return io.grpc.ServerBuilder
-            .forPort(5051)
+            .forPort(15001)
             .maxInboundMetadataSize(1000000)
             .addService(someServiceCoroutineImplBase)
             .build()

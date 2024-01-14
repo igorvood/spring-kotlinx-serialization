@@ -23,9 +23,9 @@ class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.Some
     }
 
     override suspend fun secondExecute(request: RequestProtoDto): ResponseProtoDto {
-        ResponseProtoDto.newBuilder()
+        return ResponseProtoDto.newBuilder()
             .setStuff(request.bar+" secondExecute ")
             .build()
-        return super.secondExecute(request)
+
     }
 }

@@ -1,5 +1,7 @@
+import com.google.protobuf.gradle.id
+import com.google.protobuf.gradle.protobuf
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import com.google.protobuf.gradle.*
+
 //https://github.com/kana112233/grpc-kotlin-gen?ref=androidexample365.com
 
 
@@ -45,7 +47,7 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation( "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
@@ -57,8 +59,16 @@ dependencies {
     implementation("io.grpc:grpc-kotlin-stub:1.4.1")
     implementation("io.grpc:protoc-gen-grpc-kotlin:1.3.0")
 
-    implementation("net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE")
-    implementation("net.devh:grpc-client-spring-boot-starter:2.15.0.RELEASE")
+
+//    io.grpc:grpc-api:1.58.0 (*)
+//    implementation("io.grpc:grpc-stub:1.58.0 (*)
+    implementation("io.grpc:grpc-inprocess:1.58.0")
+    implementation("io.grpc:grpc-netty-shaded:1.58.0")
+    implementation("io.grpc:grpc-protobuf:1.58.0")
+    implementation("io.grpc:grpc-services:1.58.0")
+    implementation("io.grpc:grpc-core:1.58.0")
+//    implementation("net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE")
+//    implementation("net.devh:grpc-client-spring-boot-starter:2.15.0.RELEASE")
 
 
     // Extra proto source files besides the ones residing under
@@ -103,7 +113,7 @@ protobuf {
                 // plugin will not be added. This is because of the implicit way
                 // NamedDomainObjectContainer binds the methods.
                 id("grpc") { }
-                id("grpckotlin"){}
+                id("grpckotlin") {}
             }
         }
     }
@@ -124,9 +134,9 @@ java {
     val asdf4 = "build/generated/source/proto/main/grpckotlin"
     val mainJavaSourceSet: SourceDirectorySet = sourceSets.getByName("main").java
     mainJavaSourceSet.srcDirs(kotlinSrcDir, asdf, asdf2, asdf3, asdf4)
-    println("java srcDirs -> "+mainJavaSourceSet.srcDirs)
+    println("java srcDirs -> " + mainJavaSourceSet.srcDirs)
 }
-kotlin{
+kotlin {
     val kotlinSrcDir = "src/main/kotlin"
     val asdf = "build/generated/source/proto/main/grpc"
     val asdf2 = "build/generated/source/proto/main/java"
@@ -134,7 +144,7 @@ kotlin{
     val asdf4 = "build/generated/source/proto/main/grpckotlin"
     val mainJavaSourceSet: SourceDirectorySet = sourceSets.getByName("main").kotlin
     mainJavaSourceSet.srcDirs(kotlinSrcDir, asdf, asdf2, asdf3, asdf4)
-    println("kotlin srcDirs -> "+mainJavaSourceSet.srcDirs)
+    println("kotlin srcDirs -> " + mainJavaSourceSet.srcDirs)
 }
 
 tasks.withType<Test> {
