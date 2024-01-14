@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
 
 @Service
-class Runner(
+class WebRunner(
     private val productController : ProductController
 ):CommandLineRunner {
     override fun run(vararg args: String?) {
