@@ -19,7 +19,7 @@ class GrpcClientConfig {
     }
 
     @Bean
-    fun grpcManagasdedChannel(
+    fun someServiceCoroutineStub(
         managedChannel: ManagedChannel
     ): SomeServiceGrpcKt.SomeServiceCoroutineStub {
         return SomeServiceGrpcKt.SomeServiceCoroutineStub(managedChannel)
