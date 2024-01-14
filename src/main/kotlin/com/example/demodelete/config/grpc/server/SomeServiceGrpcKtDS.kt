@@ -7,7 +7,7 @@ import ru.vood.grpc.example.v1.ResponseProtoDto
 import ru.vood.grpc.example.v1.SomeServiceGrpcKt
 
 @Service
-class SomeServiceGrpcKtDS : SomeServiceGrpcKt.SomeServiceCoroutineImplBase() {
+class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.SomeServiceCoroutineStub) : SomeServiceGrpcKt.SomeServiceCoroutineImplBase() {
 
     override suspend fun execute(request: RequestProtoDto): ResponseProtoDto {
         return super.execute(request)
@@ -15,5 +15,17 @@ class SomeServiceGrpcKtDS : SomeServiceGrpcKt.SomeServiceCoroutineImplBase() {
 
     override fun executeStream(request: RequestProtoDto): Flow<ResponseProtoDto> {
         return super.executeStream(request)
+    }
+
+
+    override suspend fun firstExecute(request: RequestProtoDto): ResponseProtoDto {
+        return someServiceCoroutineClient.secondExecute(request)
+    }
+
+    override suspend fun secondExecute(request: RequestProtoDto): ResponseProtoDto {
+        ResponseProtoDto.newBuilder()
+            .setStuff(request.bar+" secondExecute ")
+            .build()
+        return super.secondExecute(request)
     }
 }

@@ -14,4 +14,10 @@ service SomeService{
   rpc execute(RequestProtoDto) returns (ResponseProtoDto);
 
   rpc executeStream(RequestProtoDto) returns (stream ResponseProtoDto);
+
+  rpc firstExecute(RequestProtoDto) returns (ResponseProtoDto);
+
+  rpc secondExecute(RequestProtoDto) returns (ResponseProtoDto);
+
+
 }
