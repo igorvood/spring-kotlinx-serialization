@@ -1,4 +1,4 @@
-package com.example.demodelete.config.grpc
+package com.example.demodelete.config.grpc.server
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Service
