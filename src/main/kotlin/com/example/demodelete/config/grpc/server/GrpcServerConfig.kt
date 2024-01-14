@@ -1,11 +1,13 @@
 package com.example.demodelete.config.grpc.server
 
 import io.grpc.Server
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import ru.vood.grpc.example.v1.SomeServiceGrpcKt
 
 @Configuration
+//@EnableConfigurationProperties(GrpcServerProperties::class)
 class GrpcServerConfig {
 
     @Bean
