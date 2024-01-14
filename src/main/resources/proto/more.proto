@@ -6,12 +6,12 @@ message RequestProtoDto {
   string bar = 1;
 }
 
-message ResponceProtoDto {
+message ResponseProtoDto {
   string stuff = 1;
 }
 
 service SomeService{
-  rpc execute(RequestProtoDto) returns (ResponceProtoDto);
+  rpc execute(RequestProtoDto) returns (ResponseProtoDto);
 
-  rpc executeStream(RequestProtoDto) returns (stream ResponceProtoDto);
+  rpc executeStream(RequestProtoDto) returns (stream ResponseProtoDto);
 }
