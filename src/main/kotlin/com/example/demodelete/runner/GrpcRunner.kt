@@ -47,10 +47,11 @@ class GrpcRunner(
         log.info("===================Single throw end==========================")
         log.info("===================Flow begin==========================")
         runBlocking {
+            val request = RequestProtoDto.newBuilder()
+                .setBar("executeStream Bar!!!!")
+                .build()
             val firstExecute = someServiceCoroutineStub.executeStream(
-                RequestProtoDto.newBuilder()
-                    .setBar("executeStream Bar!!!!")
-                    .build()
+                request
             )
             firstExecute.map {f ->
                 log.info(f.stuff)
