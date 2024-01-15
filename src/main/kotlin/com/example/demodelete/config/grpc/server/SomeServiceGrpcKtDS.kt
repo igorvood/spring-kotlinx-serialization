@@ -34,6 +34,8 @@ class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.Some
                             .build()
                     )
                 )
+                if (num % 2 == 0)
+                    kotlinx.coroutines.delay(1000)
             }
         }
         return f

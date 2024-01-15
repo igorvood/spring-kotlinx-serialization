@@ -55,10 +55,12 @@ class GrpcRunner(
             val firstExecute = someServiceCoroutineStub.executeStream(
                 request
             )
+            log.info("before stream")
             firstExecute.map { f ->
                 log.info(f.stuff)
             }
                 .collect()
+            log.info("after collect")
 
         }
         log.info("===================Flow end==========================")
