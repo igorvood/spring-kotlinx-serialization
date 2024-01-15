@@ -1,8 +1,10 @@
 package com.example.demodelete.config.grpc.server
 
 
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import ru.vood.grpc.example.v1.RequestProtoDto
@@ -25,17 +27,34 @@ class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.Some
         log.info("executeStream: ${request.bar}")
         val cnt = abs(request.hashCode() % 10) + 2
         val range = (1..cnt)
-        val f = flow {
-            range.map {num ->
-                emit(
-                    someServiceCoroutineClient.execute(
-                        RequestProtoDto.newBuilder()
-                            .setBar("$num BAR executeStream")
-                            .build()
-                    )
-                )
-                if (num % 2 == 0)
-                    kotlinx.coroutines.delay(1000)
+        val f =// runBlocking {
+            flow {
+                range.map { num ->
+            //        async {
+                        if (num % 2 == 0) {
+
+                                kotlinx.coroutines.delay(1000)
+                                emit(
+                                    someServiceCoroutineClient.execute(
+                                        RequestProtoDto.newBuilder()
+                                            .setBar("$num BAR executeStream")
+                                            .build()
+                                    )
+                                )
+
+                        } else {
+                            emit(
+                                someServiceCoroutineClient.execute(
+                                    RequestProtoDto.newBuilder()
+                                        .setBar("$num BAR executeStream")
+                                        .build()
+                                )
+                            )
+
+                        }
+                  //  }//async
+
+                //}
             }
         }
         return f
