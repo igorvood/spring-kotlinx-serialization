@@ -17,6 +17,7 @@ class ProductController(
     private val serializer: Json
 ) {
     private val log = LoggerFactory.getLogger(this.javaClass)
+
     @GetMapping("/{id}")
     suspend fun findOne(@PathVariable id: Int): ApiDto {
         return someClient.someRequest(id.toString())
@@ -28,9 +29,9 @@ class ProductController(
 //        val apiDto = ApiDto(DataOk("$id second"))
         val apiDto = ApiDto(Errr("$id second"), QW(id.toString()))
 
-        log.info("second -> " +serializer.encodeToString(ApiDto.serializer(), apiDto))
+        log.info("second -> " + serializer.encodeToString(ApiDto.serializer(), apiDto))
 //        return j.encodeToString(ApiDto.serializer(), apiDto)
-                return apiDto
+        return apiDto
     }
 
 }
