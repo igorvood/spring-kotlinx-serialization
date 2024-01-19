@@ -2,7 +2,6 @@ package com.example.demodelete.controller
 
 import com.example.demodelete.client.SomeClient
 import com.example.demodelete.dto.ApiDto
-import com.example.demodelete.dto.DataOk
 import com.example.demodelete.dto.Errr
 import com.example.demodelete.dto.QW
 import kotlinx.serialization.json.Json
@@ -15,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ProductController(
     private val someClient: SomeClient,
-    private val j: Json
-
+    private val serializer: Json
 ) {
     private val log = LoggerFactory.getLogger(this.javaClass)
     @GetMapping("/{id}")
@@ -30,7 +28,7 @@ class ProductController(
 //        val apiDto = ApiDto(DataOk("$id second"))
         val apiDto = ApiDto(Errr("$id second"), QW(id.toString()))
 
-        log.info("second -> " +j.encodeToString(ApiDto.serializer(), apiDto))
+        log.info("second -> " +serializer.encodeToString(ApiDto.serializer(), apiDto))
 //        return j.encodeToString(ApiDto.serializer(), apiDto)
                 return apiDto
     }
