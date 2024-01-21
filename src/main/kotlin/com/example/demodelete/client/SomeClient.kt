@@ -18,7 +18,7 @@ class SomeClient(
         val serializer = ApiDto.serializer()
 //        j.encodeToString(ApiDto. ApiDto("asdsad"))
 
-        val awaitBody = webClient
+        val retrieve = webClient
             .get()
             .uri { ub ->
                 ub
@@ -28,6 +28,9 @@ class SomeClient(
             }
 //                .header()
             .retrieve()
+
+
+        val awaitBody = retrieve
 //            .awaitBody<String>()
             .awaitBody<ApiDto>()
 //        log.info(awaitBody.toString())
