@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
 
-@Service
+//@Service
 class WebRunnerMany(
     private val productController: ProductController
 ) : CommandLineRunner {
