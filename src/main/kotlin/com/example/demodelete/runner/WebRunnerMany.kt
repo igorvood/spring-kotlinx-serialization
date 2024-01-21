@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class WebRunnerMany(
-    private val productController : ProductController
-):CommandLineRunner {
+    private val productController: ProductController
+) : CommandLineRunner {
 
     private val log = LoggerFactory.getLogger(this.javaClass)
     override fun run(vararg args: String?) {
@@ -20,7 +20,7 @@ class WebRunnerMany(
         val runBlocking = runBlocking {
 
             val map = intRange.map {
-                async { kotlin.runCatching { productController.findOne(it)} }
+                async { kotlin.runCatching { productController.findOne(it) } }
             }
 
             val awaitAll = map.awaitAll()
@@ -28,12 +28,13 @@ class WebRunnerMany(
 
 
         }
-        val isFailureList = runBlocking.filter { it.isFailure }
+        val isFailureList = runBlocking.filter { it.isFailure }.map { it.exceptionOrNull()!! }.groupBy { it }
+            .map { it.key to it.value.size }.toMap()
         val isSuccessList = runBlocking.filter { it.isSuccess }
-        log.info("isFailureList -> ${isFailureList.size}")
+        log.info("isFailureList -> ${isFailureList.size} isFailureList -> $isFailureList")
         log.info("isSuccessList -> ${isSuccessList.size}")
 
-        log.info("durability -> ${isSuccessList.size.toDouble()/(isSuccessList.size +isFailureList.size).toDouble()}")
+        log.info("durability -> ${isSuccessList.size.toDouble() / (isSuccessList.size + isFailureList.size).toDouble()}")
 
     }
 }
