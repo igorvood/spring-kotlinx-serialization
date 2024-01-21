@@ -2,6 +2,7 @@ package com.example.demodelete.config.grpc.server
 
 
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
@@ -63,7 +64,10 @@ class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.Some
 
     override suspend fun firstExecute(request: RequestProtoDto): ResponseProtoDto {
         log.info("firstExecute: ${request.bar}")
-        return someServiceCoroutineClient.secondExecute(request)
+        delay(50)
+        return ResponseProtoDto.newBuilder()
+            .setStuff(request.bar + " secondExecute ")
+            .build()
     }
 
     override suspend fun secondExecute(request: RequestProtoDto): ResponseProtoDto {

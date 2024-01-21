@@ -4,6 +4,7 @@ import com.example.demodelete.client.SomeClient
 import com.example.demodelete.dto.ApiDto
 import com.example.demodelete.dto.Errr
 import com.example.demodelete.dto.QW
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,7 +21,10 @@ class ProductController(
 
     @GetMapping("/{id}")
     suspend fun findOne(@PathVariable id: Int): ApiDto {
-        return someClient.someRequest(id.toString())
+        log.info("firstExecute: ${id}")
+        delay(50)
+//        return someClient.someRequest(id.toString())
+        return ApiDto(Errr("$id second"), QW(id.toString()))
     }
 
     @GetMapping("second/{id}")
