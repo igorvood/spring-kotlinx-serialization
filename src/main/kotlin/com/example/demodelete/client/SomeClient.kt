@@ -30,7 +30,7 @@ class SomeClient(
             .retrieve()
 //            .awaitBody<String>()
             .awaitBody<ApiDto>()
-        log.info(awaitBody.toString())
+//        log.info(awaitBody.toString())
 
 //        val decodeFromString = j.decodeFromString(ApiDto.serializer(), awaitBody)
 

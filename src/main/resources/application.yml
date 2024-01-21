@@ -1,13 +1,13 @@
 somesystem:
   client:
-    host: localhost
+    host: 172.17.1.49
     port: 8080
     timeout: 10000
     http: HTTP
 
 grpc:
   client:
-    host: localhost
+    host: 172.17.1.49
     port: 15001
   server:
     port: 15001
