@@ -29,7 +29,7 @@ class WebRunnerMany(
 
         }
         val isFailureList = runBlocking.filter { it.isFailure }.map { it.exceptionOrNull()!! }.groupBy { it }
-            .map { it.key to it.value.size }.toMap()
+            .map { it.key.javaClass to it.value.size }.toMap()
         val isSuccessList = runBlocking.filter { it.isSuccess }
         log.info("isFailureList -> ${isFailureList.size} isFailureList -> $isFailureList")
         log.info("isSuccessList -> ${isSuccessList.size}")
