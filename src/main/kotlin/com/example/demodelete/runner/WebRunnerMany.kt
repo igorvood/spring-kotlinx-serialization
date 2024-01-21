@@ -7,16 +7,19 @@ import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
+import java.time.Instant
+import java.time.LocalDateTime
 
-//@Service
+@Service
 class WebRunnerMany(
     private val productController: ProductController
 ) : CommandLineRunner {
 
     private val log = LoggerFactory.getLogger(this.javaClass)
     override fun run(vararg args: String?) {
-        val intRange = 1..100_000
+        val intRange = 1..1_000
         log.info("start ->")
+        val begin = Instant.now()
         val runBlocking = runBlocking {
 
             val map = intRange.map {
@@ -28,13 +31,9 @@ class WebRunnerMany(
 
 
         }
-        val isFailureList = runBlocking.filter { it.isFailure }.map { it.exceptionOrNull()!! }.groupBy { it }
-            .map { it.key.javaClass to it.value.size }.toMap()
-        val isSuccessList = runBlocking.filter { it.isSuccess }
-        log.info("isFailureList -> ${isFailureList.size} isFailureList -> $isFailureList")
-        log.info("isSuccessList -> ${isSuccessList.size}")
-
-        log.info("durability -> ${isSuccessList.size.toDouble() / (isSuccessList.size + isFailureList.size).toDouble()}")
+        extracted(runBlocking, log, begin)
 
     }
+
+
 }
