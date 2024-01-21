@@ -1,11 +1,15 @@
 package com.example.demodelete.config.grpc.server
 
 
+import com.example.demodelete.dto.ApiDto
+import com.example.demodelete.dto.Errr
+import com.example.demodelete.dto.QW
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import ru.vood.grpc.example.v1.RequestProtoDto
@@ -14,13 +18,19 @@ import ru.vood.grpc.example.v1.SomeServiceGrpcKt
 import kotlin.math.abs
 
 @Service
-class SomeServiceGrpcKtDS(val someServiceCoroutineClient: SomeServiceGrpcKt.SomeServiceCoroutineStub) :
+class SomeServiceGrpcKtDS(
+    val someServiceCoroutineClient: SomeServiceGrpcKt.SomeServiceCoroutineStub,
+    val json: Json
+    ) :
     SomeServiceGrpcKt.SomeServiceCoroutineImplBase() {
     private val log = LoggerFactory.getLogger(this.javaClass)
     override suspend fun execute(request: RequestProtoDto): ResponseProtoDto {
         log.info("execute: ${request.bar}")
+        val encodeToString =
+            json.encodeToString(ApiDto.serializer(), ApiDto(Errr("${request.bar} second"), QW(request.bar)))
+
         return ResponseProtoDto.newBuilder()
-            .setStuff(request.bar + "-> BAR execute")
+            .setStuff(encodeToString)
             .build()
     }
 
