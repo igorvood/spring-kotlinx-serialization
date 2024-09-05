@@ -36,7 +36,8 @@ val protobufVersion = "4.28.0"
 val grpcVersion = "1.66.0"
 val grpcKotlinVersionIoRouz = "0.1.4"
 //val grpcKotlinVersion = "0.1.4"
-val grpcKotlinVersion = "1.4.1"
+val ioGrpc = "1.4.1"
+val grpcKotlinVersion = "$ioGrpc"
 val kotlinVersion = "1.7.20"
 val kotlinCoroutinesVersion = "1.6.3"
 
@@ -56,17 +57,17 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     implementation("com.google.protobuf:protobuf-kotlin:$googleProtobufVersion")
-    implementation("io.grpc:grpc-kotlin-stub:1.4.1")
-    implementation("io.grpc:protoc-gen-grpc-kotlin:1.3.0")
+    implementation("io.grpc:grpc-kotlin-stub:$ioGrpc")
+    implementation("io.grpc:protoc-gen-grpc-kotlin:$ioGrpc")
 
 
 //    io.grpc:grpc-api:1.58.0 (*)
 //    implementation("io.grpc:grpc-stub:1.58.0 (*)
-    implementation("io.grpc:grpc-inprocess:1.58.0")
-    implementation("io.grpc:grpc-netty-shaded:1.58.0")
-    implementation("io.grpc:grpc-protobuf:1.58.0")
-    implementation("io.grpc:grpc-services:1.58.0")
-    implementation("io.grpc:grpc-core:1.58.0")
+    implementation("io.grpc:grpc-inprocess:1.66.0")
+    implementation("io.grpc:grpc-netty-shaded:1.66.0")
+    implementation("io.grpc:grpc-protobuf:1.66.0")
+    implementation("io.grpc:grpc-services:1.66.0")
+    implementation("io.grpc:grpc-core:1.66.0")
 //    implementation("net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE")
 //    implementation("net.devh:grpc-client-spring-boot-starter:2.15.0.RELEASE")
 
