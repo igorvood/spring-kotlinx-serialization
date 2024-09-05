@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Service
 
-//@Service
+@Service
 class WebRunner(
     private val productController : ProductController
 ):CommandLineRunner {

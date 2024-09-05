@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 import ru.vood.grpc.example.v1.RequestProtoDto
 import ru.vood.grpc.example.v1.SomeServiceGrpcKt
 
-//@Service
+@Service
 class GrpcRunner(
     val someServiceCoroutineStub: SomeServiceGrpcKt.SomeServiceCoroutineStub
 ) : CommandLineRunner {

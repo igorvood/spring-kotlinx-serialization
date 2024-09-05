@@ -5,12 +5,13 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
+import org.springframework.stereotype.Service
 import ru.vood.grpc.example.v1.RequestProtoDto
 import ru.vood.grpc.example.v1.SomeServiceGrpcKt
 import java.time.Instant
 import java.time.LocalDateTime
 
-//@Service
+@Service
 class GrpcRunnerMany(
     val someServiceCoroutineStub: SomeServiceGrpcKt.SomeServiceCoroutineStub
 ) : CommandLineRunner {
