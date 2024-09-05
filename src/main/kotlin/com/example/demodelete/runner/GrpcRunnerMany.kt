@@ -17,7 +17,7 @@ class GrpcRunnerMany(
 ) : CommandLineRunner {
     private val log = LoggerFactory.getLogger(this.javaClass)
     override fun run(vararg args: String?) {
-        val intRange = 1..500_000
+        val intRange = 1..10//500_000
         val begin = Instant.now()
         log.info("===================Single begin==========================")
         val runBlocking =  runBlocking {

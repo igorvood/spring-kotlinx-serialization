@@ -1,11 +1,11 @@
 package com.example.demodelete.config.grpc
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import org.springframework.boot.context.properties.bind.ConstructorBinding
 
-@ConstructorBinding
+
 @ConfigurationProperties(prefix = "grpc.client")
-data class GrpcClientProp (
+data class GrpcClientProp @ConstructorBinding constructor(
     val host: String,
     val port: Int
 )

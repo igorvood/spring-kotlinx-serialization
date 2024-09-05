@@ -17,7 +17,7 @@ class WebRunnerMany(
 
     private val log = LoggerFactory.getLogger(this.javaClass)
     override fun run(vararg args: String?) {
-        val intRange = 1..1_000
+        val intRange = 1..10//1_000
         log.info("start ->")
         val begin = Instant.now()
         val runBlocking = runBlocking {

@@ -6,11 +6,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-    id("org.springframework.boot") version "2.7.1"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.serialization") version "1.7.20"//"1.9.21"
-    kotlin("plugin.spring") version "1.7.20"
+    id("org.springframework.boot") version "3.3.0"
+    id("io.spring.dependency-management") version "1.1.5"
+    kotlin("jvm") version "2.0.0"
+    kotlin("plugin.serialization") version "2.0.0"//"1.9.21"
+    kotlin("plugin.spring") version "2.0.0"
     id("com.google.protobuf") version "0.9.4"
 //    id("com.google.protobuf") version "0.8.19"
 }
@@ -22,18 +22,18 @@ version = "0.0.1-SNAPSHOT"
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {
     mavenCentral()
 }
 
-val googleProtobufVersion = "3.19.3"
+val googleProtobufVersion = "4.28.0"
 val ioGrpcVersion = "1.53.0"
 
-val protobufVersion = "3.10.0"
-val grpcVersion = "1.60.1"
+val protobufVersion = "4.28.0"
+val grpcVersion = "1.66.0"
 val grpcKotlinVersionIoRouz = "0.1.4"
 //val grpcKotlinVersion = "0.1.4"
 val grpcKotlinVersion = "1.4.1"
@@ -47,10 +47,10 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -122,7 +122,7 @@ protobuf {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 }
 

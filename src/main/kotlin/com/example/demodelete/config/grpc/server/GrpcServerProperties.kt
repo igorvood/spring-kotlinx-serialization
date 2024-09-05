@@ -1,7 +1,5 @@
 package com.example.demodelete.config.grpc.server
 
-import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.boot.convert.DataSizeUnit
 import org.springframework.boot.convert.DurationUnit
 import org.springframework.util.unit.DataSize

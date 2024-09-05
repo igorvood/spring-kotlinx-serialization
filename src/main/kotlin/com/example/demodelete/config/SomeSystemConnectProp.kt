@@ -1,12 +1,11 @@
 package com.example.demodelete.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import org.springframework.boot.context.properties.bind.ConstructorBinding
 
 
-@ConstructorBinding
 @ConfigurationProperties(prefix = "somesystem.client")
-data class SomeSystemConnectProp(
+data class SomeSystemConnectProp @ConstructorBinding constructor(
     override val host: String,
 
     override val port: String?,
